@@ -39,6 +39,10 @@ AS ROOT USER execute below command
 
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
+OR if weave network
+[root@k8s-master ~]# export kubever=$(kubectl version | base64 | tr -d '\n')
+[root@k8s-master ~]# kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$kubever"
+
 kubectl get nodes
 
  kubectl get pods --all-namespaces
