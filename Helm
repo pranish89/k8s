@@ -1,0 +1,16 @@
+#helm create helmtest     #this create a directory with helmtest inside that 
+
+Update the vlaues.yaml file with the values so it can  pass the values inside the templates to deploy.yaml service.yam etc...
+
+# helm install helmtestdeploy helmtest   
+
+
+saipavan  ~  1  helm install helmtestdeploy helmtest
+NAME: helmtestdeploy
+LAST DEPLOYED: Tue Jan 26 21:20:02 2021
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+
+
+
