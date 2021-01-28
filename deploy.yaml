@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: webapp1
-        image: saipavanseetha/deployimg:12
+        image: nginx
         ports:
-        - containerPort: 8080
+        - containerPort: 80
