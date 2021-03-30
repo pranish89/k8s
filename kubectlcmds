@@ -1,0 +1,10 @@
+#kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+
+#kubectl get deployments
+
+#kubectl get pods -o wide
+
+#kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080    (port number is what the container is running)
+
+#kubectl exec -ti $POD_NAME curl localhost:8080
+
