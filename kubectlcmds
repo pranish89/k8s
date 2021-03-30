@@ -8,3 +8,9 @@
 
 #kubectl exec -ti $POD_NAME curl localhost:8080
 
+
+#kubectl scale deployments/kubernetes-bootcamp --replicas=4
+
+#kubectl get pods -o wide
+
+
