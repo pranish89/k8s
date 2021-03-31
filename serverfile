@@ -50,3 +50,20 @@ kubectl get nodes
  
  DASHBOARD SETUP
  https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#login-not-available
+
+
+
+If the cluster is unhealthy 
+
+ please run the belwo  vi /etc/kubernetes/manifests/kube-scheduler.yaml
+Clear the line (spec->containers->command) containing this phrase: - --port=0
+
+$ vi /etc/kubernetes/manifests/kube-controller-manager.yaml
+Clear the line (spec->containers->command) containing this phrase: - --port=0
+
+$ sudo systemctl restart kubelet.service
+
+
+ 
+ 
+ 
