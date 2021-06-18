@@ -34,7 +34,7 @@ AS ROOT USER execute below command
 
 #export KUBECONFIG=/etc/kubernetes/admin.conf
 
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml  or use the flannel file in this reo
 
 OR if weave network
 [root@k8s-master ~]# export kubever=$(kubectl version | base64 | tr -d '\n')
@@ -47,7 +47,25 @@ kubectl get nodes
  
  DASHBOARD SETUP
  https://github.com/kubernetes/dashboard/blob/master/docs/user/accessing-dashboard/README.md#login-not-available
+ 
+ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
 
+kubectl edit svc kubernetes-dashboard -n kubernetes-dashboard
+
+change the type from clusterIP to the NodePort
+```selector:
+    k8s-app: kubernetes-dashboard
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}```
+  #Execute below comands to grant permission to access the dashboard
+  #kubectl create serviceaccount dashboard-admin-sa
+  #kubectl create clusterrolebinding dashboard-admin-sa
+  #kubectl create clusterrolebinding dashboard-admin-sa  --clusterrole=cluster-admin --serviceaccount=default:dashboard-admin-sa
+  #kubectl get secrets
+  #kubectl describe secrets dashboard-admin-sa-token-pgh8r  #### Use this token to access the kubernets dashboard.
+  
 
 
 If the cluster is unhealthy 
