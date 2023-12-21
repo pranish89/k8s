@@ -1,10 +1,13 @@
 make sure system is havaing 1.5G ram and 2 core (master)  prerequiests diabled firewall,selinux,swapspace
 
-yum install docker
 
-systemctl start docker
 
-systemctl enable docker
+___________________
+Remove the old containerd:apt --> remove containerd or docker or podman any contanirzation
+3. Update repository data and install the new containerd: apt update, apt install containerd.io   or dnf for centos
+4. Remove the installed default config file: rm /etc/containerd/config.toml
+5. Restart containerd: systemctl restart containerd
+________________________
 
 cat kub.repo 
 
