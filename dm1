@@ -1,0 +1,38 @@
+DEMO-1: Kubernetes Common Commands
+//Create resource(s) from file
+# kubectl create -f <filename>.yml
+//Create from multiple files
+# kubectl create -f <file1>.yml -f <file2>.yml
+//start a single instance of nginx
+# kubectl run nginx --image=nginx
+// List all services
+# kubectl get services
+// List all pods in all namespaces
+# kubectl get pods --all-namespaces
+// List all pods include uninitialized
+# kubectl get pods --include-uninitialized
+// List all pods in the namespace, with more details
+# kubectl get pods -o wide
+// List a particular deployment
+# kubectl get deployment <deployment name>
+# kubectl describe nodes <node-name>
+# kubectl describe pods <pod-name>
+// Delete a pod using filename.
+# kubectl delete -f <filename>.yml
+// Delete pods and services with same names "foo" and "foo1"
+# kubectl delete pod,service foo foo1
+// Delete pods and services with label
+# kubectl delete pods,services -l name=<labelname>
+// Delete all pods and services, including uninitialized ones,
+in namespace
+# kubectl -n <namespace> delete po,svc --all
+//Show Pods stdout (logs)
+# kubectl logs <Pod_name>
+//Run command directly on a Pod
+# kubectl exec <Pod_name> -- ls /
+//Forward traffic of specific port of local machine to mentioned
+port of Pod
+# kubectl port-forward <Pod_name> aaaa:bbbb
+//Where, aaaa is port on local machine and bbbb is port on Pod 
+// Show master and services addresses.
+# kubectl cluster-info
