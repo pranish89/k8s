@@ -1,6 +1,15 @@
 make sure system is havaing 1.5G ram and 2 core (master)  prerequiests diabled firewall,selinux,swapspace
 
+yum install yum-utils -y
+Add the stable Docker Community Edition repository to yum:
 
+Copy
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+Install Containerd
+Install the latest version of containerd:
+
+Copy
+yum install containerd.io -y
 
 ___________________
 Remove the old containerd:apt --> remove containerd or docker or podman any contanirzation
