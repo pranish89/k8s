@@ -14,7 +14,7 @@
 #kubectl get pods -o wide
 
 
-
+#kubectl api-resources
 ______________________________________________________________
 
 
