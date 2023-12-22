@@ -1,0 +1,17 @@
+#####k8scmd to create pod #####
+
+kubectl run mypod --restart=Never --image=nginx
+
+######k8s to create deployment ######
+
+kubectl create deployment mydeployment --image=nginx -n namespace
+
+kubectl get deployment -n namespace
+
+kubectl get pods -n namespace
+
+kubectl delete deployment/mydeployment
+
+######service#######
+
+kubectl 
