@@ -1,0 +1,28 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: example-configmap 
+data:
+  # Configuration values can be set as key-value properties
+  database: mongodb
+  database_uri: mongodb://localhost:27017
+
+
+####
+kubectl get configmaps -n namespae
+kubectl describe configmaps example-configmap -n namespace
+
+############################
+
+kind: Pod 
+apiVersion: v1 
+metadata:
+  name: pod-env-var 
+spec:
+  containers:
+    - name: env-var-configmap
+      image: nginx:1.7.9 
+      envFrom:
+        - configMapRef:
+            name: example-configmap
+######################
