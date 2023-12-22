@@ -4,7 +4,7 @@
 
 #kubectl get pods -o wide
 
-#kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 8080    (port number is what the container is running)
+#kubectl expose deployment/kubernetes-bootcamp --type="NodePort" --port 80    (port number is what the container is running)
 
 #kubectl exec -ti $POD_NAME curl localhost:8080
 
