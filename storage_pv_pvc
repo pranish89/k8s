@@ -1,0 +1,111 @@
+##### create a storage classes on the cluster######
+cat storageclass.yaml 
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+
+
+#####kubectl apply -f storageclass.yaml
+
+#####kubectl get storageclasses
+NAME            PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE      ALLOWVOLUMEEXPANSION   AGE
+local-storage   kubernetes.io/no-provisioner   Delete          WaitForFirstConsumer   false                  47m
+
+
+
+####creation of pv ######
+cat pv.yaml 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: test-local-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /data/volumes/pv1
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - serverz.example.com
+
+  ( serverz- should be replaced with the worker node name )        
+  #####kubectl -f apply pv.yaml####
+  
+###kubectl get pv
+NAME            CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM          STORAGECLASS    REASON   AGE
+test-local-pv   1Gi       RWO            Retain           Bound       sai/test-pvc   local-storage 
+
+######ON WORKER NODE(SERVERZ IN MY CASE)#####
+# Execute these commands on the worker node where the POD will be located
+mkdir -p /data/volumes/pv1
+chmode 777 /data/volumes/pv1
+
+
+ON MASTER AGAIN
+
+####cat pvc.yaml 
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: test-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local-storage
+  resources:
+    requests:
+      storage: 1Gi
+#####kubectl apply -f pvc.yaml -n <namespace>
+
+##kubectl get pvc -n <namespace>
+NAME       STATUS    VOLUME          CAPACITY   ACCESS MODES   STORAGECLASS    AGE
+test-pvc   Bound     test-local-pv   10Gi       RWO            local-storage   47m
+
+#####pod yaml###3
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-local-vol
+  labels:
+    name: test-local-vol
+spec:
+  containers:
+  - name: app
+    image: busybox
+    command: ['sh', '-c', 'echo "The local volume is mounted!" > /mnt/test.txt && sleep 3600']
+    volumeMounts:
+      - name: local-persistent-storage
+        mountPath: /mnt
+  volumes:
+    - name: local-persistent-storage
+      persistentVolumeClaim:
+        claimName: test-pvc
+
+
+#####kubectl apply -f pod.yaml -n <namespace>###
+
+kubectl  get pvc -n sai
+kubectl get pv
+
+##AND on worker node cat  /data/volumes/pv1/test.txt####
+
+
+
+
+
+
+
+
