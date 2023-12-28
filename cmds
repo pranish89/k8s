@@ -15,3 +15,4 @@ kubectl delete deployment/mydeployment
 ######service#######
 
 kubectl 
+kubectl describe nodes | grep -A2 -e "^\\s*CPU Requests" -e "^\\s*CPU Limits" -e "^\\s*Memory Requests" -e "^\\s*Memory Limits"
