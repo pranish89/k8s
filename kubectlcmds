@@ -15,6 +15,36 @@
 
 
 #kubectl api-resources
+
+# etcdrun endpoint status
+
+#etcdctl member list
+
+#etcdrun endpoint status --cluster -w table
+
+#etcd -version
+etcd Version: 3.3.11
+Git SHA: 2cf9e51
+Go Version: go1.15.2
+Go OS/Arch: linux/amd64
+
+#sudo systemctl status etcd
+
+#sudo etcdrun endpoint status
+
+#etcdrun member remove d619243fdcdba994
+
+# etcdrun member add sserver-ctrlplane03  --peer-urls=https://serverctrlplane01:2380
+
+ # etcdrun member add server-ctrlplane03  --peer-urls=https://server-ctrlplane03:2380
+
+ # etcdrun endpoint status
+
+#systemctl status kube-apiserver.service
+
+
+
+
 ______________________________________________________________
 
 
