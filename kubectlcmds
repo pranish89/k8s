@@ -18,7 +18,7 @@
 
 # etcdrun endpoint status
 
-#etcdctl member list
+#etcdrun member list
 
 #etcdrun endpoint status --cluster -w table
 
