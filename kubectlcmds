@@ -13,6 +13,7 @@
 
 #kubectl get pods -o wide
 
+#kubectl cluster-info
 
 #kubectl api-resources
 
