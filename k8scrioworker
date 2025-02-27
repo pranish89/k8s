@@ -1,0 +1,59 @@
+#vi /etc/sysctl.d/99-k8s-cri.conf
+net.bridge.bridge-nf-call-iptables=1
+net.ipv4.ip_forward=1
+net.bridge.bridge-nf-call-ip6tables=1
+
+
+#sysctl --system
+
+#modprobe overlay
+
+#modprobe br_netfilter
+
+#dnf install epel-release
+
+#dnf --enablerepo=epel -y install iptables-legacy
+
+
+#alternatives --config iptables 
+
+There are 2 programs which provide 'iptables'.
+
+  Selection    Command
+-----------------------------------------------
+*+ 1           /usr/sbin/iptables-nft
+   2           /usr/sbin/iptables-legacy
+
+Enter to keep the current selection[+], or type selection number: 2   
+
+
+#swapoff -a 
+
+#comment out swap line /etc/fstab
+
+#dnf -y install centos-release-okd-4.16
+
+#sed -i -e "s/enabled=1/enabled=0/g" /etc/yum.repos.d/CentOS-OKD-4.16.repo
+
+#dnf --enablerepo=centos-okd-4.16 -y install cri-o
+
+#systemctl enable --now crio
+
+#cat /etc/yum.repos.d/kube.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/
+enabled=0
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
+
+#dnf --enablerepo=kubernetes -y install kubeadm kubelet cri-tools iproute-tc container-selinux
+
+#systemctl enable kubelet
+
+#kubeadm join 192.168.12.164:6443 --token 221e5x.e2atq9l0d8wocxrs \
+        --discovery-token-ca-cert-hash sha256:3ebd54d863b86b4fc17b805396828505010f57d542644437f1be3423734368d2
+
+
+
+
