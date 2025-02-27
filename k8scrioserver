@@ -69,6 +69,17 @@ gpgkey=https://pkgs.k8s.io/core:/stable:/v1.30/rpm/repodata/repomd.xml.key
 #kubectl get nodes
 
 
+After adding worker node
+
+
+wget https://raw.githubusercontent.com/projectcalico/calico/master/manifests/calico.yaml 
+--2025-02-27 04:26:25--  https://raw.githubusercontent.com/projectcalico/calico/master/manifests/calico.yaml
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 2606:50c0:8002::154, 2606:50c0:8001::154, 2606:50c0:8000::154, ...
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|2606:50c0:8002::154|:443... ^C
+
+ vi calico.yaml
+
+kubectl apply -f calico.yaml 
 
 
 
